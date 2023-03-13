@@ -1,24 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import Piano from './Piano/Piano';
+import Challenger from './Challenger/Challenger';
+import MidiDebug from './Debugger/MidiDebug';
+import { MidiProvider } from './Context/MidiProvider';
+import { Container, Grid } from '@mui/material';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MidiProvider>
+      <Container maxWidth="lg">
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Piano />
+          </Grid>
+          <Grid item xs={12}>
+            <MidiDebug />
+          </Grid>
+          <Grid item xs={12}>
+            <Challenger />
+          </Grid>
+        </Grid>
+      </Container>
+    </MidiProvider>
   );
 }
 
