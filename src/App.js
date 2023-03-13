@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Piano from './Piano/Piano';
+import Piano from './Feature/Piano/Piano';
 import Challenger from './Challenger/Challenger';
 import MidiDebug from './Debugger/MidiDebug';
 import { MidiProvider } from './Context/MidiProvider';

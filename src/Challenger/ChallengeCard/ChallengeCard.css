@@ -1,0 +1,57 @@
+.challenge-card-container {
+    height: 17vh;
+    width: 10vh;
+    margin-top: 5vh;
+    margin-left: 3vh;
+}
+
+.challenge-card {
+    height: 10em;
+    width: 10em;
+    background-color: white;
+    border: 1px solid rgb(204, 204, 204);
+    position: absolute;
+    padding: 1em;
+    z-index: 5;
+    box-shadow: 1px 5px 5px rgb(236, 236, 236);
+}
+
+.challenge-card-container .challenge-card:first-child {
+
+    transform: rotate(5deg);
+    z-index: 10;
+}
+
+.challenge-card-container .challenge-card:last-child {
+    transform: rotate(-10deg);
+    z-index: 0;
+}
+
+.challenge-card .h1 {
+    transform: inherit
+}
+
+.challenge-card .key {
+    font-size: 100px;
+}
+.challenge-card .chord {
+    font-size: 50px;
+}
+
+@keyframes spin {
+    from {
+        transform:translate(0px, 0px);
+        opacity: 1;
+    }
+    to {
+        transform:translate(300px, 0px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.fly-away {
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count:  infinite;
+  animation-timing-function: cubic-bezier(.04,.66,.13,.95); 
+}

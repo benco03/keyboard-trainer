@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { MidiContext } from "../Context/MidiProvider";
-import midiNoteToString from "../util/midiNoteToString";
+import { MidiContext } from "../../Context/MidiProvider";
+import midiNoteToString from "../../util/midiNoteToString";
 import './PianoFlex.css';
 
 export function Key(props) {
