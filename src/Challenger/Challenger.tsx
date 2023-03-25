@@ -5,10 +5,10 @@ import * as Chord from "tonal-chord"
 import * as Note from "tonal-note"
 import { ChallengeCard } from "./ChallengeCard/ChallengeCard";
 import { MidiContext } from "../Context/MidiProvider";
-import midiNoteToString from "../util/midiNoteToString";
+import { midiToNote } from "../util/midiNoteConverters";
 import './ChallengeCard/ChallengeCard.css'
 
-export default function Challenger({ props }) {
+export default function Challenger() {
 
     const context = useContext(MidiContext)
 
@@ -29,20 +29,21 @@ export default function Challenger({ props }) {
     const [completed, setCompleted] = useState(false)
 
     useEffect(() => {
-        if (currentChallenge.note == undefined) {
+        if (currentChallenge.note === undefined) {
             console.log("Generating challenge");
             setCurrentChallenge(generateChallenge())
             setNextChallenge(generateChallenge())
         }
 
         checkChallenge()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context.keys])
 
 
     const checkChallenge = () => {
 
         let expectedNotes = Chord.notes(currentChallenge.note + '' + currentChallenge.chord)
-        let actualNotes = context.keys.map(midiNoteToString)
+        let actualNotes = context.keys.map(midiToNote)
 
         console.log("Checking challenge", expectedNotes, actualNotes);
         
@@ -91,7 +92,7 @@ export default function Challenger({ props }) {
                     <div className="challenge-card-container">
                         <ChallengeCard success={completed} note={currentChallenge.note} chord={currentChallenge.chord} />
                         <ChallengeCard note={nextChallenge.note} chord={nextChallenge.chord} />
-                        <ChallengeCard visible={completed == undefined || !completed} chord={currentChallenge.chord} />
+                        <ChallengeCard visible={completed === undefined || !completed} chord={currentChallenge.chord} />
                     </div>
                     <p>Chords completed: {completedCount}</p>
                 </Card>

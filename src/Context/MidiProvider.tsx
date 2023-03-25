@@ -1,8 +1,8 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const MidiContext = createContext({keys: [], midi: {inputs: []}});
 
-export function MidiProvider({ props, children }) {
+export function MidiProvider({ children }) {
 
     const [keys, setKeys] = useState([])
     const [midi, setMidi] = useState({inputs: []})
@@ -14,14 +14,14 @@ export function MidiProvider({ props, children }) {
 
     useEffect(() => {
         function onMIDIMessage(event) {
-            console.log("MIDI in state", midi)
-            console.log('MIDI data', event)
+            console.debug("MIDI in state", midi)
+            console.debug('MIDI data', event)
             var data = event.data
-            var cmd = data[0] >> 4
-            var channel = data[0] & 0xf
+            //var cmd = data[0] >> 4
+            //var channel = data[0] & 0xf
             var type = data[0] & 0xf0
             var note = data[1]
-            var velocity = data[2]
+            //var velocity = data[2]
 
             switch (type) {
                 case 144: // noteOn message
@@ -53,6 +53,7 @@ export function MidiProvider({ props, children }) {
         navigator.requestMIDIAccess({
             sysex: false
         }).then(onMIDISuccess, onMIDIFailure)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []
     )
 
